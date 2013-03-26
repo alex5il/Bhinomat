@@ -1,0 +1,114 @@
+﻿@model EyalProject.Models.Questions
+
+@{
+    ViewBag.Title = "AddQuestion";
+}
+
+@Scripts.Render("~/bundles/AddQuestion")
+
+<h2>צור שאלה</h2>
+
+<p style="color: red; font-weight: bold">@ViewBag.OutMessage</p>
+
+@using (Html.BeginForm()) {
+
+<section style="width:30%;float:right">
+    <label class="form-label">נושא:</label>
+    @Html.DropDownListFor(model => model.Subject,(SelectList)ViewBag.SubjectTypes)
+    <br/>
+
+    <label class="form-label">תת-נושא:</label>
+    @Html.DropDownListFor(model => model.SecondarySubject,(SelectList)ViewBag.SecondarySubjectTypes)
+    <br/>
+
+    <label class="form-label">רמת קושי:</label>
+    @Html.DropDownListFor(model => model.Difficulty,(SelectList)ViewBag.DifficultyTypes)
+    <br/>
+    
+    <label class="form-label">סוג שאלה:</label>
+     @Html.DropDownListFor(model => model.Type,(SelectList)ViewBag.QuestionTypes, new {@onchange="changeQuestionType(this.value)"})
+</section> 
+   
+<section style="width:70%;float:right">
+    <label class="HeadType">שאלה:</label>
+    @Html.TextAreaFor(model => model.Question)
+    
+    <br/>
+    
+    <div id="dvAnswear">
+        <label class="HeadType">תשובה:</label>
+            
+        @*True/False type of answear *@
+        <div id="dvTrueFalseAnswearType">
+            <label class="form-label">נכון</label>
+            @Html.RadioButtonFor(model => model.AnswearCorrect, "True")
+            <br/>
+            <label class="form-label">לא נכון</label>
+            @Html.RadioButtonFor(model => model.AnswearCorrect, "False")
+        </div>
+            
+        @*American type of answear *@
+        <div id="dvAmericanAnswearType" style="display:none">
+            <label class="form-label">תשובה 1:</label>
+            <input type="text" id="txtAmerican1"/>
+            <input type="radio" name="rdbAmerican" id="rdbAmerican1"/>
+
+            <br/>
+            <label class="form-label">תשובה 2:</label>
+            <input type="text" id="txtAmerican2"/>
+            <input type="radio" name="rdbAmerican" id="rdbAmerican2"/>
+                
+            <br/>
+            <label class="form-label">תשובה 3:</label>
+            <input type="text" id="txtAmerican3"/>
+            <input type="radio" name="rdbAmerican" id="rdbAmerican3"/>
+
+            <br/>
+            <label class="form-label">תשובה 4:</label>
+            <input type="text" id="txtAmerican4"/>
+            <input type="radio" name="rdbAmerican" id="rdbAmerican4"/>
+        </div>
+            
+        @*MultiChoice type of answear *@
+        <div id="dvMultiChoiceAnswearType" style="display:none">
+            <div id="dvAddRemoveMutliAnswear">
+                <input class="btn btn-primary" type="button" value="+" onclick="editMultiAnswear('add')"/>
+                <input class="btn btn-primary" type="button" value="-" onclick="editMultiAnswear('remove')"/>
+            </div>
+            
+            <div id="dvMultiAnswearContainer">
+                <label class="form-label">תשובה 1:</label>
+                <input type="text" id="txtMulti1"/>
+                <input type="checkbox" name="chkbxMulti" id="chkbxMulti1"/>
+
+                <br/>
+                <label class="form-label">תשובה 2:</label>
+                <input type="text" id="txtMulti2"/>
+                <input type="checkbox" name="chkbxMulti" id="chkbxMulti2"/>
+                
+                <br/>
+                <label class="form-label">תשובה 3:</label>
+                <input type="text" id="txtMulti3"/>
+                <input type="checkbox" name="chkbxMulti" id="chkbxMulti3"/>
+
+                <br/>
+                <label class="form-label">תשובה 4:</label>
+                <input type="text" id="txtMulti4"/>
+                <input type="checkbox" name="chkbxMulti" id="chkbxMulti4"/>
+            </div>
+        </div>
+
+        @*Open type of answear *@
+        <div id="dvOpenAnswearType" style="display:none">
+            @Html.TextAreaFor(model => model.AnswearCorrect)
+        </div>
+    </div>
+</section>
+
+<br/>
+
+    <div>
+    <input type="submit" value="Create" class="btn btn-primary" style="position: absolute; top:420px; right:150px"/>
+        </div>
+    
+}

@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title - בחינומט</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width" />
+        @Styles.Render("~/Content/css")
+        @Styles.Render("~/Content/BootStrapStyle")
+
+        @Scripts.Render("~/bundles/modernizr")
+        @Scripts.Render("~/bundles/jquery")
+
+        @Styles.Render("~/Content/themes/base/css")
+        @Scripts.Render("~/bundles/jqueryui")
+        
+        @Scripts.Render("~/bundles/jqueryui")
+        @Scripts.Render("~/bundles/jqueryui")
+        
+        @Scripts.Render("~/bundles/BootStrapJS")
+    </head>
+    <body dir="rtl">
+        <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    @Html.ActionLink("בחינומט", "BuildDb", "Home", null, new {@class="brand"})
+                    <div class="nav-collapse">
+                        <ul id="menu" class="nav">
+                            <li>@Html.ActionLink("עמוד הבית", "BuildDb", "Home")</li>
+                            <li>@Html.ActionLink("צור מבחן", "BuildTest", "Home")</li>
+                            <li>@Html.ActionLink("צור שאלה", "AddQuestion", "Home")</li>
+                        </ul>
+                        <section id="login">
+                            <div style="float: left">
+                                @Html.Partial("_LoginPartial")
+                            </div>
+                        </section>
+                    </div><!--/.nav-collapse -->
+                </div>
+            </div>
+        </div>
+
+        <div class="container" style="margin-top: 50px">
+
+            @RenderBody()
+
+        </div> <!-- /container -->
+        @RenderSection("scripts", required: false)
+    </body>
+</html>

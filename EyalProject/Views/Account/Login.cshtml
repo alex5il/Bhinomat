@@ -1,0 +1,48 @@
+﻿@model EyalProject.Models.LoginModel
+
+@{
+    ViewBag.Title = "כניסה";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+</hgroup>
+
+<section id="loginForm">
+@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
+    
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    @Html.LabelFor(m => m.UserName, new { @class="HeadType"} )
+    @Html.TextBoxFor(m => m.UserName)
+    @Html.ValidationMessageFor(m => m.UserName)
+
+    <br/>
+            
+    @Html.LabelFor(m => m.Password, new { @class="HeadType"} )
+    @Html.PasswordFor(m => m.Password)
+    @Html.ValidationMessageFor(m => m.Password)
+      
+    <br/>
+    <br/>
+
+    @Html.CheckBoxFor(m => m.RememberMe)
+    @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
+
+    <input type="submit" value="כניסה" class="btn btn-primary"/>
+    
+    <br/>
+    <br/>
+    
+    <p>
+        @Html.ActionLink("הרשם", "Register", null, new {@class="label"}) אם עדיין אין לך משתמש.
+    </p>
+}
+</section>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

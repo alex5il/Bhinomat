@@ -1,0 +1,12 @@
+﻿@if (Request.IsAuthenticated) {
+    <text>
+        שלום, @Html.ActionLink(User.Identity.Name, "Manage", "Account", routeValues: null, htmlAttributes: new { @class = "username", title = "Manage" })!
+        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" })) {
+            @Html.AntiForgeryToken()
+            <a href="javascript:document.getElementById('logoutForm').submit()">התנתק</a>
+        }
+    </text>
+} else {
+    @Html.ActionLink("הירשם", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink",@class="btn btn-primary",style="margin-right:5px" })
+    @Html.ActionLink("כניסה", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink",@class="btn btn-primary",style="margin-right:5px" })
+}

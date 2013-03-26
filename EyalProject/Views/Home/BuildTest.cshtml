@@ -1,0 +1,111 @@
+﻿@{
+    ViewBag.Title = "צור מבחן";
+}
+
+@Scripts.Render("~/bundles/CreateTest")
+
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+</hgroup>
+
+<br/>
+
+<label class="form-label">תאריך המבחן</label>
+<input title="תאריך המבחן" type="text" id="dtTestDate"/>
+
+<br/>
+
+<label class="form-label">נושא:</label>
+<select name="subject" title="נושא">
+    <option value="volvo">עברית</option>
+    <option value="saab">מתמטיקה</option>
+    <option value="opel">פיזיקה</option>
+    <option value="audi">כימיה</option>
+</select>
+
+<br/>
+
+<label class="form-label">תת-נושא:</label>
+<select name="subject" title="תת-נושא">
+    <option value="volvo">Volvo</option>
+    <option value="saab">Saab</option>
+    <option value="opel">Opel</option>
+    <option value="audi">Audi</option>
+</select>
+
+<br/>
+
+<label class="form-label">סמסטר</label>
+<select name="subject" title="סמסטר">
+    <option value="volvo">Volvo</option>
+    <option value="saab">Saab</option>
+    <option value="opel">Opel</option>
+    <option value="audi">Audi</option>
+</select>
+
+<br/>
+<br/>
+
+<table>
+    <thead>
+        <tr>
+            <td></td>
+            <td>Open</td>
+            <td>TrueFalse</td>
+            <td>Multi</td>
+            <td>American</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Easy</td>
+            <td>
+                <input type="number" min="0" max="10" value="0" id="numEasyquestions"/>
+            </td>
+            <td>
+                <input type="number" min="0" max="10" value="0" id="numNormalquestions"/>
+            </td>
+            <td>
+                <input type="number" min="0" max="10" value="0" id="numHardquestions"/>
+            </td>
+             <td>
+                <input type="number" min="0" max="10" value="0" id="numHardquestions"/>
+            </td>
+        </tr>
+        <tr>
+            <td>Medium</td>
+            <td>
+                <input type="number" min="0" max="10" value="0" id="numEasyquestions"/>
+            </td>
+            <td>
+                <input type="number" min="0" max="10" value="0" id="numNormalquestions"/>
+            </td>
+            <td>
+                <input type="number" min="0" max="10" value="0" id="numHardquestions"/>
+            </td>
+             <td>
+                <input type="number" min="0" max="10" value="0" id="numHardquestions"/>
+            </td>
+        </tr>
+        <tr>
+            <td>Hard</td>
+            <td>
+                <input type="number" min="0" max="10" value="0" id="numEasyquestions"/>
+            </td>
+            <td>
+                <input type="number" min="0" max="10" value="0" id="numNormalquestions"/>
+            </td>
+            <td>
+                <input type="number" min="0" max="10" value="0" id="numHardquestions"/>
+            </td>
+             <td>
+                <input type="number" min="0" max="10" value="0" id="numHardquestions"/>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<br/>
+<br/>
+
+<input type="button" value="יצירת מבחן" class="btn btn-primary"/>
+<!-- end of -->

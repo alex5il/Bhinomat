@@ -1,0 +1,33 @@
+﻿@model EyalProject.Models.RegisterModel
+@{
+    ViewBag.Title = "דף הרשמה";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+    <h2>צור משתמש חדש!</h2>
+</hgroup>
+
+@using (Html.BeginForm()) {
+    
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
+    @Html.LabelFor(m => m.UserName, new { @class="HeadType"} )
+    @Html.TextBoxFor(m => m.UserName)
+            
+    @Html.LabelFor(m => m.Password, new { @class="HeadType"} )
+    @Html.PasswordFor(m => m.Password)
+            
+    @Html.LabelFor(m => m.ConfirmPassword, new { @class="HeadType"} )
+    @Html.PasswordFor(m => m.ConfirmPassword)
+            
+    <br/>
+    <br/>
+
+    <input type="submit" value="הירשם" class="btn btn-primary"/>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
