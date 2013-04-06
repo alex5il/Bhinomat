@@ -27,3 +27,24 @@ function editMultiAnswear(action) {
         }
     }
 }
+
+function changeCourse(courseId) {
+    
+    $.ajax({
+        url: 'LoadCourseSubjects',
+        type: 'POST',
+        data: JSON.stringify({ courseId: courseId }),
+        dataType: 'json',
+        contentType: 'application/json',
+        success: function (data) {
+            $('select#ddlSubjects').empty();
+
+            $.each(data, function () {
+                $('select#ddlSubjects').append(
+                '<option value="' + this.Value + '">'
+                + this.Text +
+                '</option>');
+            });
+        }
+    });
+}

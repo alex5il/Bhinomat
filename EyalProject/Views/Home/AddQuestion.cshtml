@@ -12,22 +12,26 @@
 
 @using (Html.BeginForm()) {
 
-<section style="width:30%;float:right">
-    <label class="form-label">נושא:</label>
-    @Html.DropDownListFor(model => model.Subject,(SelectList)ViewBag.SubjectTypes)
-    <br/>
+    <section style="width:30%;float:right">
+        <label class="form-label">קןרס:</label>
+        @Html.DropDownListFor(model => model.Course,(SelectList)ViewBag.Courses, new {@onchange="changeCourse(this.value)"})
+        <br/>
 
-    <label class="form-label">תת-נושא:</label>
-    @Html.DropDownListFor(model => model.SecondarySubject,(SelectList)ViewBag.SecondarySubjectTypes)
-    <br/>
+        <label class="form-label">נושא:</label>
+        @Html.DropDownListFor(model => model.Subject,(SelectList)ViewBag.SubjectTypes, new {@id="ddlSubjects"})
+        <br/>
 
-    <label class="form-label">רמת קושי:</label>
-    @Html.DropDownListFor(model => model.Difficulty,(SelectList)ViewBag.DifficultyTypes)
-    <br/>
+        <label class="form-label">תת-נושא:</label>
+        @Html.DropDownListFor(model => model.SecondarySubject,(SelectList)ViewBag.SecondarySubjectTypes)
+        <br/>
+
+        <label class="form-label">רמת קושי:</label>
+        @Html.DropDownListFor(model => model.Difficulty,(SelectList)ViewBag.DifficultyTypes)
+        <br/>
     
-    <label class="form-label">סוג שאלה:</label>
-     @Html.DropDownListFor(model => model.Type,(SelectList)ViewBag.QuestionTypes, new {@onchange="changeQuestionType(this.value)"})
-</section> 
+        <label class="form-label">סוג שאלה:</label>
+        @Html.DropDownListFor(model => model.Type,(SelectList)ViewBag.QuestionTypes, new {@onchange="changeQuestionType(this.value)"})
+    </section> 
    
 <section style="width:70%;float:right">
     <label class="HeadType">שאלה:</label>
@@ -108,7 +112,7 @@
 <br/>
 
     <div>
-    <input type="submit" value="Create" class="btn btn-primary" style="position: absolute; top:420px; right:150px"/>
+    <input type="submit" value="Create" class="btn btn-primary" style="position: absolute; top:480px; right:150px"/>
         </div>
     
 }

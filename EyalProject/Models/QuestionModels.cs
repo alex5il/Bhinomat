@@ -30,6 +30,7 @@ namespace EyalProject.Models
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int QuestionId { get; set; }
         public DateTime LastUseDate { get; set; }
+        public string Course { get; set; }
         public string Subject { get; set; }
         public string SecondarySubject { get; set; }
         public string Difficulty { get; set; }
@@ -42,6 +43,7 @@ namespace EyalProject.Models
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int QuestionId { get; set; }
         public DateTime LastUseDate { get; set; }
+        public string Course { get; set; }
         public string Subject { get; set; }
         public string Type { get; set; }
         public string SecondarySubject { get; set; }
@@ -57,6 +59,7 @@ namespace EyalProject.Models
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int QuestionId { get; set; }
         public DateTime LastUseDate { get; set; }
+        public string Course { get; set; }
         public string Subject { get; set; }
         public string Type { get; set; }
         public string SecondarySubject { get; set; }
@@ -76,6 +79,7 @@ namespace EyalProject.Models
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int QuestionId { get; set; }
         public DateTime LastUseDate { get; set; }
+        public string Course { get; set; }
         public string Subject { get; set; }
         public string Type { get; set; }
         public string SecondarySubject { get; set; }
@@ -99,6 +103,7 @@ namespace EyalProject.Models
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int QuestionId { get; set; }
         public DateTime LastUseDate { get; set; }
+        public string Course { get; set; }
         public string Subject { get; set; }
         public string Type { get; set; }
         public string SecondarySubject { get; set; }
@@ -113,6 +118,7 @@ namespace EyalProject.Models
     {
         public int QuestionId { get; set; }
         public DateTime LastUseDate { get; set; }
+        public string Course { get; set; }
         public string Subject { get; set; }
         public string Type { get; set; }
         public string SecondarySubject { get; set; }

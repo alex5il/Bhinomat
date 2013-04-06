@@ -33,10 +33,11 @@ namespace EyalProject.Controllers
         {
             List<SelectListItem>[] arrList = CreateItems();
 
-            ViewBag.SubjectTypes = new SelectList(arrList[0], "Value", "Text", null);
-            ViewBag.SecondarySubjectTypes = new SelectList(arrList[1], "Value", "Text", null);
-            ViewBag.DifficultyTypes = new SelectList(arrList[2], "Value", "Text", null);
-            ViewBag.QuestionTypes = new SelectList(arrList[3], "Value", "Text", null);
+            ViewBag.Courses = new SelectList(arrList[0], "Value", "Text", null);
+            ViewBag.SubjectTypes = new SelectList(arrList[1], "Value", "Text", null);
+            ViewBag.SecondarySubjectTypes = new SelectList(arrList[2], "Value", "Text", null);
+            ViewBag.DifficultyTypes = new SelectList(arrList[3], "Value", "Text", null);
+            ViewBag.QuestionTypes = new SelectList(arrList[4], "Value", "Text", null);
 
             return View();
         }
@@ -46,10 +47,11 @@ namespace EyalProject.Controllers
         {
             List<SelectListItem>[] arrList = CreateItems();
 
-            ViewBag.SubjectTypes = new SelectList(arrList[0], "Value", "Text", null);
-            ViewBag.SecondarySubjectTypes = new SelectList(arrList[1], "Value", "Text", null);
-            ViewBag.DifficultyTypes = new SelectList(arrList[2], "Value", "Text", null);
-            ViewBag.QuestionTypes = new SelectList(arrList[3], "Value", "Text", null);
+            ViewBag.Courses = new SelectList(arrList[0], "Value", "Text", null);
+            ViewBag.SubjectTypes = new SelectList(arrList[1], "Value", "Text", null);
+            ViewBag.SecondarySubjectTypes = new SelectList(arrList[2], "Value", "Text", null);
+            ViewBag.DifficultyTypes = new SelectList(arrList[3], "Value", "Text", null);
+            ViewBag.QuestionTypes = new SelectList(arrList[4], "Value", "Text", null);
 
             if (ModelState.IsValid)
             {
@@ -99,11 +101,41 @@ namespace EyalProject.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult LoadCourseSubjects(string courseId)
+        {
+            List<SelectListItem> itemsCourses = new List<SelectListItem>();
+
+            switch (courseId)
+            {
+                case "קורס א":
+                    itemsCourses.Add(new SelectListItem { Text = "נושא א", Value = "נושא א" });
+                    break;
+                case "קורס ב":
+                    itemsCourses.Add(new SelectListItem { Text = "נושא ב", Value = "נושא ב" });
+                    break;
+                case "קורס ג":
+                    itemsCourses.Add(new SelectListItem { Text = "נושא ג", Value = "נושא ג" });
+                    break;
+                case "קורס ד":
+                    itemsCourses.Add(new SelectListItem { Text = "נושא ד", Value = "נושא ד" });
+                    break;
+            }
+            return Json(itemsCourses);
+        }
+
         private List<SelectListItem>[] CreateItems()
         {
             // TODO :// Optimise the List item Creation
 
-            List<SelectListItem>[] arrList = new List<SelectListItem>[4];
+            List<SelectListItem>[] arrList = new List<SelectListItem>[5];
+
+            List<SelectListItem> itemsCourses = new List<SelectListItem>();
+
+            itemsCourses.Add(new SelectListItem { Text = "קורס א", Value = "קורס א" });
+            itemsCourses.Add(new SelectListItem { Text = "קורס ב", Value = "קורס ב" });
+            itemsCourses.Add(new SelectListItem { Text = "קורס ג", Value = "קורס ג" });
+            itemsCourses.Add(new SelectListItem { Text = "קורס ד", Value = "קורס ד" });
 
             List<SelectListItem> itemsSubject = new List<SelectListItem>();
 
@@ -132,10 +164,11 @@ namespace EyalProject.Controllers
             itemsQuestionType.Add(new SelectListItem { Text = "יותר מתשובה 1", Value = "MultiChoice" });
             itemsQuestionType.Add(new SelectListItem { Text = "פתוחה", Value = "Open" });
 
-            arrList[0] = itemsSubject;
-            arrList[1] = itemsSecondarySubject;
-            arrList[2] = itemsDifficulty;
-            arrList[3] = itemsQuestionType;
+            arrList[0] = itemsCourses;
+            arrList[1] = itemsSubject;
+            arrList[2] = itemsSecondarySubject;
+            arrList[3] = itemsDifficulty;
+            arrList[4] = itemsQuestionType;
 
             return arrList;
         }
