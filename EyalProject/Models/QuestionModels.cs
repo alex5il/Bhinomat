@@ -69,6 +69,7 @@ namespace EyalProject.Models
         public string Answear2 { get; set; }
         public string Answear3 { get; set; }
         public string Answear4 { get; set; }
+        public string Answear5 { get; set; }
         public string AnswearCorrect { get; set; }
     }
 

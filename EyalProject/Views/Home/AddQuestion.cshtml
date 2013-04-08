@@ -13,7 +13,7 @@
 @using (Html.BeginForm()) {
 
     <section style="width:30%;float:right">
-        <label class="form-label">קןרס:</label>
+        <label class="form-label">קורס:</label>
         @Html.DropDownListFor(model => model.Course,(SelectList)ViewBag.Courses, new {@onchange="changeCourse(this.value)"})
         <br/>
 
@@ -34,43 +34,50 @@
     </section> 
    
 <section style="width:70%;float:right">
-    <label class="HeadType">שאלה:</label>
-    @Html.TextAreaFor(model => model.Question)
+    <label class="HeadType" for="txtQuestion">שאלה:</label>
+    @Html.TextAreaFor(model => model.Question, new { id="txtQuestion" })
     
     <br/>
     
     <div id="dvAnswear">
-        <label class="HeadType">תשובה:</label>
+        <label class="HeadType" for="txtOpenAnswer">תשובה:</label>
             
         @*True/False type of answear *@
         <div id="dvTrueFalseAnswearType">
-            <label class="form-label">נכון</label>
-            @Html.RadioButtonFor(model => model.AnswearCorrect, "True")
-            <br/>
-            <label class="form-label">לא נכון</label>
-            @Html.RadioButtonFor(model => model.AnswearCorrect, "False")
+            <label class="form-label">@Html.RadioButtonFor(model => model.AnswearCorrect, "True")נכון</label>
+            <label class="form-label">@Html.RadioButtonFor(model => model.AnswearCorrect, "False")לא נכון</label>
         </div>
             
         @*American type of answear *@
         <div id="dvAmericanAnswearType" style="display:none">
-            <label class="form-label">תשובה 1:</label>
-            <input type="text" id="txtAmerican1"/>
-            <input type="radio" name="rdbAmerican" id="rdbAmerican1"/>
+            <div id="dvAddRemoveAmericanAnswer">
+                <input class="btn btn-primary" type="button" value="+" onclick="editAmericanAnswer('add')"/>
+                <input class="btn btn-primary" type="button" value="-" onclick="editAmericanAnswer('remove')"/>
+            </div>
 
-            <br/>
-            <label class="form-label">תשובה 2:</label>
-            <input type="text" id="txtAmerican2"/>
-            <input type="radio" name="rdbAmerican" id="rdbAmerican2"/>
-                
-            <br/>
-            <label class="form-label">תשובה 3:</label>
-            <input type="text" id="txtAmerican3"/>
-            <input type="radio" name="rdbAmerican" id="rdbAmerican3"/>
+            <div id="dvAmericanAnswerContainer">
+                <label class="form-label">תשובה 1:</label>
+                <input type="radio" name="rdbAmerican" id="rdbAmerican1" />
+                <input type="text" id="txtAmerican1" />
 
-            <br/>
-            <label class="form-label">תשובה 4:</label>
-            <input type="text" id="txtAmerican4"/>
-            <input type="radio" name="rdbAmerican" id="rdbAmerican4"/>
+                <br />
+
+                <label class="form-label">תשובה 2:</label>
+                <input type="radio" name="rdbAmerican" id="rdbAmerican2" />
+                <input type="text" id="txtAmerican2" />
+
+                <br />
+
+                <label class="form-label">תשובה 3:</label>
+                <input type="radio" name="rdbAmerican" id="rdbAmerican3" />
+                <input type="text" id="txtAmerican3" />
+
+                <br />
+
+                <label class="form-label">תשובה 4:</label>
+                <input type="radio" name="rdbAmerican" id="rdbAmerican4" />
+                <input type="text" id="txtAmerican4" />
+            </div>
         </div>
             
         @*MultiChoice type of answear *@
@@ -104,7 +111,7 @@
 
         @*Open type of answear *@
         <div id="dvOpenAnswearType" style="display:none">
-            @Html.TextAreaFor(model => model.AnswearCorrect)
+            @Html.TextAreaFor(model => model.AnswearCorrect, new { id="txtOpenAnswer" })
         </div>
     </div>
 </section>

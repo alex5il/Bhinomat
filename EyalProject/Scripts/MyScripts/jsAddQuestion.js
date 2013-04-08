@@ -1,4 +1,5 @@
 ﻿var multiAnswearcounter = 4;
+var americanAnswerCounter = 4;
 
 function changeQuestionType(questionType) {
     // Hide all the inner answear type divs and show the chosen one
@@ -24,6 +25,27 @@ function editMultiAnswear(action) {
         if (multiAnswearcounter > 2) {
             multiAnswearcounter--;
             $("#dvMultiAnswearContainer :nth-last-child(-n+4)").remove();
+        }
+    }
+}
+
+// Function used for adding/removing american answer
+function editAmericanAnswer(action) {
+    if (action === 'add') {
+        // Check that we dont have above 5 answers
+        if (americanAnswerCounter < 5) {
+            americanAnswerCounter++;
+            $("#dvAmericanAnswerContainer").append(
+                '<br/> ' +
+                '<label class="form-label">תשובה ' + americanAnswerCounter + '</label> ' +
+                '<input type="radio" name="rdbAmerican" id="rdbAmerican' + americanAnswerCounter + '"/>' +
+                '<input type="text" id="txtAmerican' + americanAnswerCounter + '"/> ');
+        }
+    } else {
+        // Check that we dont have below 4 answers
+        if (americanAnswerCounter > 4) {
+            americanAnswerCounter--;
+            $("#dvAmericanAnswerContainer :nth-last-child(-n+4)").remove();
         }
     }
 }
