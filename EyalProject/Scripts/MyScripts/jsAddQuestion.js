@@ -51,7 +51,6 @@ function editAmericanAnswer(action) {
 }
 
 function changeCourse(courseId) {
-    
     $.ajax({
         url: 'LoadCourseSubjects',
         type: 'POST',
@@ -63,10 +62,14 @@ function changeCourse(courseId) {
 
             $.each(data, function () {
                 $('select#ddlSubjects').append(
-                '<option value="' + this.Value + '">'
-                + this.Text +
+                '<option value="' + this.Id + '">'
+                + this.Name +
                 '</option>');
             });
         }
     });
 }
+
+$(function () {
+    changeCourse($("#ddlCourses").val());
+});

@@ -1,4 +1,4 @@
-﻿@model EyalProject.Models.Questions
+﻿@model EyalProject.Models.AddQuestionViewModel
 
 @{
     ViewBag.Title = "AddQuestion";
@@ -14,23 +14,24 @@
 
     <section style="width:30%;float:right">
         <label class="form-label">קורס:</label>
-        @Html.DropDownListFor(model => model.Course,(SelectList)ViewBag.Courses, new {@onchange="changeCourse(this.value)"})
+       
+        @Html.DropDownListFor(model => model.Question.Course, (SelectList)ViewBag.Courses, new {@id="ddlCourses", @onchange="changeCourse(this.value)"})
         <br/>
 
         <label class="form-label">נושא:</label>
-        @Html.DropDownListFor(model => model.Subject,(SelectList)ViewBag.SubjectTypes, new {@id="ddlSubjects"})
+        @Html.DropDownListFor(model => model.Question.Subject, (SelectList)ViewBag.Subjects, new {@id="ddlSubjects"})
         <br/>
 
         <label class="form-label">תת-נושא:</label>
-        @Html.DropDownListFor(model => model.SecondarySubject,(SelectList)ViewBag.SecondarySubjectTypes)
+        @Html.DropDownListFor(model => model.Question.Subsubject, (SelectList)ViewBag.Subsubjects)
         <br/>
 
         <label class="form-label">רמת קושי:</label>
-        @Html.DropDownListFor(model => model.Difficulty,(SelectList)ViewBag.DifficultyTypes)
+        @Html.DropDownListFor(model => model.Question.Difficulty, (SelectList)ViewBag.Difficulties)
         <br/>
     
         <label class="form-label">סוג שאלה:</label>
-        @Html.DropDownListFor(model => model.Type,(SelectList)ViewBag.QuestionTypes, new {@onchange="changeQuestionType(this.value)"})
+        @Html.DropDownListFor(model => model.Question.QuestionType, (SelectList)ViewBag.QuestionTypes, new {@onchange="changeQuestionType(this.value)"})
     </section> 
    
 <section style="width:70%;float:right">
@@ -44,8 +45,8 @@
             
         @*True/False type of answear *@
         <div id="dvTrueFalseAnswearType">
-            <label class="form-label">@Html.RadioButtonFor(model => model.AnswearCorrect, "True")נכון</label>
-            <label class="form-label">@Html.RadioButtonFor(model => model.AnswearCorrect, "False")לא נכון</label>
+            <label class="form-label">@Html.RadioButtonFor(model => model.TrueFalseQuestion.IsTrue, "True")נכון</label>
+            <label class="form-label">@Html.RadioButtonFor(model => model.TrueFalseQuestion.IsTrue, "False")לא נכון</label>
         </div>
             
         @*American type of answear *@
@@ -111,7 +112,7 @@
 
         @*Open type of answear *@
         <div id="dvOpenAnswearType" style="display:none">
-            @Html.TextAreaFor(model => model.AnswearCorrect, new { id="txtOpenAnswer" })
+            @Html.TextAreaFor(model => model.OpenQuestion.CorrectAnswer, new { id="txtOpenAnswer" })
         </div>
     </div>
 </section>
@@ -119,7 +120,7 @@
 <br/>
 
     <div>
-    <input type="submit" value="Create" class="btn btn-primary" style="position: absolute; top:480px; right:150px"/>
-        </div>
+        <input type="submit" value="Create" class="btn btn-primary" style="position: absolute; top:480px; right:150px" />
+    </div>
     
 }

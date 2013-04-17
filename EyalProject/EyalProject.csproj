@@ -172,8 +172,9 @@
       <DependentUpon>201302011838193_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AccountModels.cs" />
-    <Compile Include="Models\QuestionModels.cs" />
+    <Compile Include="Models\AccountModel.cs" />
+    <Compile Include="Models\AddQuestionViewModel.cs" />
+    <Compile Include="Models\QuestionModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
