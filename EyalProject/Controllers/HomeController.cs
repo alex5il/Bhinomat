@@ -112,6 +112,12 @@ namespace EyalProject.Controllers
         {
             return Json(qcDB.SubjectsSet.Where(s => s.CourseId == courseId).ToList());
         }
+        
+        [HttpPost]
+        public ActionResult Test(string jsonChange)
+        {
+            return null;
+        }
 
         public ActionResult EditCourses()
         {

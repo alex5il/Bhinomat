@@ -50,6 +50,66 @@ function editAmericanAnswer(action) {
     }
 }
 
+function addQuestion() {
+
+    var urlString = "";
+    var correctAnswers;
+    var inCorrectAnswers;
+    var question = new Object();
+    question.QuestionText = $("#txtQuestion").val();
+    question.SubSubjectId = $("#ddlSubSubjects").val();
+    question.DifficultyId = $("#ddlDifficulties").val();
+    question.TypeId = $("#ddlTypes").val();
+
+    switch (question.TypeId) {
+    case "open":
+        urlString = "AddOpenQuestion";
+        question.CorrectAnswer = $("#txtOpenAnswer").val();
+    break;
+    case "trueFalse":
+        urlString = "AddTrueFalseQuestion";
+        question.IsTrue = $("input:radio[name='rdbTrueFalse']:checked").val();
+    break;
+    case "american":
+        urlString = "AddAmericanQuestion";
+        question.CorrectAnswer = $("#txtAmericanCorrect").val();
+
+        inCorrectAnswers = $("#dvAmericanIncorrectAnswers :text");
+
+        for (var i = 0; i < inCorrectAnswers.length; i++) {
+            question.IncorrectAnswers[i] = inCorrectAnswers[i];
+        }
+    break;
+    case "moreThanOne":
+        urlString = "AddMoreThanOneQuestion";
+        correctAnswers = $("#dvAmericanIncorrectAnswers :text");
+
+        for (var i = 0; i < correctAnswers.length; i++) {
+            question.CorrectAnswers[i] = correctAnswers[i];
+        }
+        
+        inCorrectAnswers = $("#dvAmericanIncorrectAnswers :text");
+
+        for (var i = 0; i < inCorrectAnswers.length; i++) {
+            question.IncorrectAnswers[i] = inCorrectAnswers[i];
+        }
+    break;
+        
+    default:
+    }
+
+    $.ajax({
+        url: urlString,
+        type: 'POST',
+        data: JSON.stringify(question),
+        dataType: 'json',
+        contentType: 'application/json',
+        success: function (data) {
+           
+        }
+    });
+}
+
 function changeCourse(courseId) {
     $.ajax({
         url: 'LoadCourseSubjects',
@@ -72,4 +132,5 @@ function changeCourse(courseId) {
 
 $(function () {
     changeCourse($("#ddlCourses").val());
+    changeCourses();
 });
