@@ -45,6 +45,8 @@ namespace EyalProject.Models
         [ForeignKey("DifficultyId")]
         public Difficulty Difficulty { get; set; }
 
+        public string QuestionType { get; set; }
+
         [NotMapped]
         public Course Course
         {
