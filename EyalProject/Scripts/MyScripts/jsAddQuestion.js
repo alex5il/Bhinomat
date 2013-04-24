@@ -65,7 +65,6 @@ function editAmericanAnswerIncorrect(action) {
 }
 
 function addQuestion() {
-
     var urlString = "";
     var correctAnswers;
     var inCorrectAnswers;
@@ -73,9 +72,9 @@ function addQuestion() {
     question.QuestionText = $("#txtQuestion").val();
     question.SubSubjectId = $("#ddlSubsubjects").val();
     question.DifficultyId = $("#ddlDifficulties").val();
-    question.TypeId = $("#ddlTypes").val();
+    question.QuestionType = $("#ddlTypes").val();
 
-    switch (question.TypeId) {
+    switch (question.QuestionType) {
     case "Open":
         urlString = "AddOpenQuestion";
         question.CorrectAnswer = $("#txtOpenAnswer").val();
