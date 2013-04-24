@@ -15,7 +15,7 @@ namespace EyalProject.Models
         {
         }
         
-        public DbSet<TrueFalseQuestion> TrueFalseQuestiosnSet { get; set; }
+        public DbSet<TrueFalseQuestion> TrueFalseQuestionsSet { get; set; }
         public DbSet<AmericanQuestion> AmericanQuestionsSet { get; set; }
         public DbSet<MoreThanOneQuestion> MoreThenOneQuestionsSet { get; set; }
         public DbSet<OpenQuestion> OpenQuestionSet { get; set; }
@@ -35,7 +35,7 @@ namespace EyalProject.Models
         public int Id { get; set; }
 
         public string QuestionText { get; set; }
-        public DateTime LastUseDate { get; set; }
+        public DateTime? LastUseDate { get; set; }
 
         public int SubsubjectId { get; set; }
         [ForeignKey("SubsubjectId")]

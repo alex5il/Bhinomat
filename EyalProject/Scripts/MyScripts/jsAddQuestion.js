@@ -62,15 +62,15 @@ function addQuestion() {
     question.TypeId = $("#ddlTypes").val();
 
     switch (question.TypeId) {
-    case "open":
+    case "Open":
         urlString = "AddOpenQuestion";
         question.CorrectAnswer = $("#txtOpenAnswer").val();
     break;
-    case "trueFalse":
+    case "TrueFalse":
         urlString = "AddTrueFalseQuestion";
         question.IsTrue = $("input:radio[name='rdbTrueFalse']:checked").val();
     break;
-    case "american":
+    case "American":
         urlString = "AddAmericanQuestion";
         question.CorrectAnswer = $("#txtAmericanCorrect").val();
 
@@ -80,7 +80,7 @@ function addQuestion() {
             question.IncorrectAnswers[i] = inCorrectAnswers[i];
         }
     break;
-    case "moreThanOne":
+    case "MoreThanOne":
         urlString = "AddMoreThanOneQuestion";
         correctAnswers = $("#dvAmericanIncorrectAnswers :text");
 
@@ -132,5 +132,7 @@ function changeCourse(courseId) {
 
 $(function () {
     changeCourse($("#ddlCourses").val());
-    changeCourses();
+    changeQuestionType($("#ddlTypes").val());
+
+    $("#btnCreate").on("click", addQuestion);
 });

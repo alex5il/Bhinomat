@@ -72,16 +72,6 @@
 
             context.Database.ExecuteSqlCommand("delete from Difficulties");
             context.DifficultiesSet.AddOrUpdate(difficulties);
-
-            QuestionType[] questionTypes = {
-                               new QuestionType {Name="נכון/לא נכון"},
-                               new QuestionType {Name="אמריקאי"},
-                               new QuestionType {Name="יותר מתשובה אחת"},
-                               new QuestionType {Name="פתוחה"}
-                           };
-
-            context.Database.ExecuteSqlCommand("delete from QuestionTypes");
-            context.QuestionTypesSet.AddOrUpdate(questionTypes);
         }
     }
 }
