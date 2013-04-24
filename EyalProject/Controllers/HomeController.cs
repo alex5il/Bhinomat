@@ -26,43 +26,66 @@ namespace EyalProject.Controllers
 
         public ActionResult AddQuestion()
         {
-            ViewBag.Courses       = new SelectList(qcDB.CoursesSet.ToList(), "Id", "Name");
-            ViewBag.Subjects      = new SelectList(qcDB.SubjectsSet.ToList(), "Id", "Name");
-            ViewBag.Subsubjects   = new SelectList(qcDB.SubsubjectsSet.ToList(), "Id", "Name");
-            ViewBag.Difficulties  = new SelectList(qcDB.DifficultiesSet.ToList(), "Id", "Name");
+            ViewBag.Courses = new SelectList(qcDB.CoursesSet.ToList(), "Id", "Name");
+            ViewBag.Subjects = new SelectList(qcDB.SubjectsSet.ToList(), "Id", "Name");
+            ViewBag.Subsubjects = new SelectList(qcDB.SubsubjectsSet.ToList(), "Id", "Name");
+            ViewBag.Difficulties = new SelectList(qcDB.DifficultiesSet.ToList(), "Id", "Name");
+            ViewBag.Types = new SelectList(new[] {
+                                                   new SelectListItem() { Text = "פתוחה", Value = "Open" },
+                                                   new SelectListItem() { Text = "נכון/לא נכון", Value = "TrueFalse" },
+                                                   new SelectListItem() { Text = "אמריקאית", Value = "American" },
+                                                   new SelectListItem() { Text = "יותר מתשובה אחת", Value = "MoreThanOne" }
+                                                 }, "Value", "Text");
 
             return View();
         }
 
         [HttpPost]
-        public void AddAmericanQuestion(AmericanQuestion question)
+        public JsonResult AddAmericanQuestion(AmericanQuestion question)
         {
+            qcDB.AmericanQuestionsSet.Add(question);
+            qcDB.SaveChanges();
 
+            return Json(true);
         }
 
         [HttpPost]
-        public void AddMoreThanOneQuestion(MoreThanOneQuestion question)
+        public JsonResult AddMoreThanOneQuestion(MoreThanOneQuestion question)
         {
+            qcDB.MoreThenOneQuestionsSet.Add(question);
+            qcDB.SaveChanges();
 
+            return Json(true);
         }
 
         [HttpPost]
-        public void AddOpenQuestion(OpenQuestion question)
+        public JsonResult AddOpenQuestion(OpenQuestion question)
         {
+            qcDB.OpenQuestionsSet.Add(question);
+            qcDB.SaveChanges();
 
+            return Json(true);
         }
 
         [HttpPost]
-        public void AddTrueFalseQuestion(TrueFalseQuestion question)
+        public JsonResult AddTrueFalseQuestion(TrueFalseQuestion question)
         {
             qcDB.TrueFalseQuestionsSet.Add(question);
             qcDB.SaveChanges();
+
+            return Json(true);
         }
 
         [HttpPost]
         public ActionResult LoadCourseSubjects(int courseId)
         {
             return Json(qcDB.SubjectsSet.Where(s => s.CourseId == courseId).ToList());
+        }
+
+        [HttpPost]
+        public ActionResult LoadSubjectSubsubjects(int subjectId)
+        {
+            return Json(qcDB.SubsubjectsSet.Where(s => s.SubjectId == subjectId).ToList());
         }
     }
 }

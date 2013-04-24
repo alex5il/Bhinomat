@@ -1,8 +1,13 @@
-﻿@model EyalProject.Models.AddQuestionViewModel
-
-@{
+﻿@{
     ViewBag.Title = "AddQuestion";
 }
+
+<script>
+    var minNumberOfMoreThanOneAnswers = @(EyalProject.Models.MoreThanOneQuestion.MinAnswers);
+    var maxNumberOfMoreThanOneAnswers = @(EyalProject.Models.MoreThanOneQuestion.MaxAnswers);
+    var minNumberOfAmericanAnswers = @(EyalProject.Models.AmericanQuestion.MinAnswers);
+    var maxNumberOfAmericanAnswers = @(EyalProject.Models.AmericanQuestion.MaxAnswers);
+</script>
 
 @Scripts.Render("~/bundles/AddQuestion")
 
@@ -10,132 +15,114 @@
 
 <p style="color: red; font-weight: bold">@ViewBag.OutMessage</p>
 
+<section style="width: 30%; float: right">
+    <label class="form-label">קורס:</label>
 
+    @Html.DropDownList("ddlCourses", (SelectList)ViewBag.Courses, new { @onchange = "changeCourse(this.value)" })
+    <br />
 
-    <section style="width:30%;float:right">
-        <label class="form-label">קורס:</label>
-       
-        @Html.DropDownListFor(model => model.Question.Course, (SelectList)ViewBag.Courses, new {@id="ddlCourses", @onchange="changeCourse(this.value)"})
-        <br/>
+    <label class="form-label">נושא:</label>
+    @Html.DropDownList("ddlSubjects", (SelectList)ViewBag.Subjects, new { @onchange = "changeSubject(this.value)" })
+    <br />
 
-        <label class="form-label">נושא:</label>
-        @Html.DropDownListFor(model => model.Question.Subject, (SelectList)ViewBag.Subjects, new {@id="ddlSubjects"})
-        <br/>
+    <label class="form-label">תת-נושא:</label>
+    @Html.DropDownList("ddlSubsubjects", (SelectList)ViewBag.Subsubjects)
+    <br />
 
-        <label class="form-label">תת-נושא:</label>
-        @Html.DropDownListFor(model => model.Question.Subsubject, (SelectList)ViewBag.Subsubjects, new { @id="ddlSubSubjects" })
-        <br/>
+    <label class="form-label">רמת קושי:</label>
+    @Html.DropDownList("ddlDifficulties", (SelectList)ViewBag.Difficulties)
+    <br />
 
-        <label class="form-label">רמת קושי:</label>
-        @Html.DropDownListFor(model => model.Question.Difficulty, (SelectList)ViewBag.Difficulties, new { @id="ddlDifficulties" })
-        <br/>
-    
-        <label class="form-label">סוג שאלה:</label>
-        @Html.DropDownList("ddlTypes", new[] {
-                                                new SelectListItem() {
-                                                    Text="פתוחה",
-                                                    Value="Open"
-                                                },
-                                                new SelectListItem() {
-                                                    Text="נכון/לא נכון",
-                                                    Value="TrueFalse"
-                                                },
-                                                new SelectListItem() {
-                                                    Text="אמריקאית",
-                                                    Value="American"
-                                                },
-                                                new SelectListItem() {
-                                                    Text="יותר מתשובה אחת",
-                                                    Value="MoreThanOne"
-                                                }
-                            }, new { @onchange="changeQuestionType(this.value)" })
-    </section> 
-   
-<section style="width:70%;float:right">
+    <label class="form-label">סוג שאלה:</label>
+    @Html.DropDownList("ddlTypes", (SelectList)ViewBag.Types, new { @onchange = "changeQuestionType(this.value)" })
+</section>
+
+<section style="width: 70%; float: right">
     <label class="HeadType" for="txtQuestion">שאלה:</label>
-    @Html.TextAreaFor(model => model.Question, new { id="txtQuestion" })
-    
-    <br/>
-    
+    @Html.TextArea("txtQuestion")
+
+    <br />
+
     <div id="dvAnswear">
-        <label class="HeadType" for="txtOpenAnswer">תשובה:</label>
-            
+
+
         @*True/False type of answear *@
-        <div id="dvTrueFalseAnswearType">
-            <label class="form-label">@Html.RadioButtonFor(model => model.TrueFalseQuestion.IsTrue, "True")נכון</label>
-            <label class="form-label">@Html.RadioButtonFor(model => model.TrueFalseQuestion.IsTrue, "False")לא נכון</label>
+        <div id="dvTrueFalseAnswerType">
+            <label class="HeadType" for="txtOpenAnswer">תשובה:</label>
+            <label class="form-label">@Html.RadioButton("rdbTrueFalse", "True")נכון</label>
+            <label class="form-label">@Html.RadioButton("rdbTrueFalse", "False")לא נכון</label>
         </div>
-            
+
         @*American type of answear *@
-        <div id="dvAmericanAnswearType" style="display:none">
-            <div id="dvAddRemoveAmericanAnswer">
-                <input class="btn btn-primary" type="button" value="+" onclick="editAmericanAnswer('add')"/>
-                <input class="btn btn-primary" type="button" value="-" onclick="editAmericanAnswer('remove')"/>
-            </div>
+        <div id="dvAmericanAnswerType" style="display: none">
 
-            <div id="dvAmericanAnswerContainer">
-                <label class="form-label">תשובה 1:</label>
-                <input type="radio" name="rdbAmerican" id="rdbAmerican1" />
-                <input type="text" id="txtAmerican1" />
+            <label class="form-label">תשובוה נכונה:</label>
+            <input type="text" id="txtAmericanCorrect" class="answer" />
 
+            <br />
+            <br />
+            
+            <label class="form-label">תשובות לא נכונות:</label>
+
+            <input class="btn btn-primary" type="button" value="+" onclick="editAmericanAnswerIncorrect('add')" />
+            <input class="btn btn-primary" type="button" value="-" onclick="editAmericanAnswerIncorrect('remove')" />
+
+            <br />
+            <br />
+
+            <div id="dvAmericanIncorrect">
+                <input type="text" class="answer" />
                 <br />
-
-                <label class="form-label">תשובה 2:</label>
-                <input type="radio" name="rdbAmerican" id="rdbAmerican2" />
-                <input type="text" id="txtAmerican2" />
-
+                <input type="text" class="answer" />
                 <br />
-
-                <label class="form-label">תשובה 3:</label>
-                <input type="radio" name="rdbAmerican" id="rdbAmerican3" />
-                <input type="text" id="txtAmerican3" />
-
-                <br />
-
-                <label class="form-label">תשובה 4:</label>
-                <input type="radio" name="rdbAmerican" id="rdbAmerican4" />
-                <input type="text" id="txtAmerican4" />
+                <input type="text" class="answer" />
             </div>
         </div>
-            
-        @*MultiChoice type of answear *@
-        <div id="dvMoreThanOneAnswearType" style="display:none">
-            <div id="dvAddRemoveMutliAnswear">
-                <input class="btn btn-primary" type="button" value="+" onclick="editMultiAnswear('add')"/>
-                <input class="btn btn-primary" type="button" value="-" onclick="editMultiAnswear('remove')"/>
+
+        @*MultiChoice type of answer *@
+        <div id="dvMoreThanOneAnswerType" style="display: none">
+
+            <label class="form-label">תשובות נכונות:</label>
+            <input class="btn btn-primary" type="button" value="+" onclick="editMultiAnswerCorrect('add')" />
+            <input class="btn btn-primary" type="button" value="-" onclick="editMultiAnswerCorrect('remove')" />
+
+            <br />
+            <br />
+
+            <div id="dvMoreThanOneCorrect">
+                <input type="text" class="answer" />
             </div>
-            
-            <div id="dvMultiAnswearContainer">
-                <label class="form-label">תשובה 1:</label>
-                <input type="text" id="txtMulti1"/>
-                <input type="checkbox" name="chkbxMulti" id="chkbxMulti1"/>
 
-                <br/>
-                <label class="form-label">תשובה 2:</label>
-                <input type="text" id="txtMulti2"/>
-                <input type="checkbox" name="chkbxMulti" id="chkbxMulti2"/>
-                
-                <br/>
-                <label class="form-label">תשובה 3:</label>
-                <input type="text" id="txtMulti3"/>
-                <input type="checkbox" name="chkbxMulti" id="chkbxMulti3"/>
+            <br />
 
-                <br/>
-                <label class="form-label">תשובה 4:</label>
-                <input type="text" id="txtMulti4"/>
-                <input type="checkbox" name="chkbxMulti" id="chkbxMulti4"/>
+            <label class="form-label">תשובות לא נכונות:</label>
+            <input class="btn btn-primary" type="button" value="+" onclick="editMultiAnswerIncorrect('add')" />
+            <input class="btn btn-primary" type="button" value="-" onclick="editMultiAnswerIncorrect('remove')" />
+
+            <br />
+            <br />
+
+            <div id="dvMoreThanOneIncorrect">
+
+                <input type="text" class="answer" />
+                <br />
+                <input type="text" class="answer" />
+                <br />
+                <input type="text" class="answer" />
+
             </div>
         </div>
 
         @*Open type of answear *@
-        <div id="dvOpenAnswearType" style="display:none">
-            @Html.TextAreaFor(model => model.OpenQuestion.CorrectAnswer, new { id="txtOpenAnswer" })
+        <div id="dvOpenAnswerType" style="display: none">
+            <label class="HeadType" for="txtOpenAnswer">תשובה:</label>
+            @Html.TextArea("txtOpenAnswer")
         </div>
     </div>
 </section>
 
-<br/>
+<br />
 
-    <div>
-        <input id="btnCreate" type="button" value="Create" class="btn btn-primary" style="position: absolute; top:480px; right:150px" />
-    </div>
+<div>
+    <input id="btnCreate" type="button" value="צור" class="btn btn-primary" style="position: absolute; top: 480px; right: 150px" />
+</div>

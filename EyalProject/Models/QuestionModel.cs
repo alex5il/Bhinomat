@@ -18,7 +18,7 @@ namespace EyalProject.Models
         public DbSet<TrueFalseQuestion> TrueFalseQuestionsSet { get; set; }
         public DbSet<AmericanQuestion> AmericanQuestionsSet { get; set; }
         public DbSet<MoreThanOneQuestion> MoreThenOneQuestionsSet { get; set; }
-        public DbSet<OpenQuestion> OpenQuestionSet { get; set; }
+        public DbSet<OpenQuestion> OpenQuestionsSet { get; set; }
 
         public DbSet<Course> CoursesSet { get; set; }
         public DbSet<Subject> SubjectsSet { get; set; }
@@ -82,7 +82,23 @@ namespace EyalProject.Models
     public class AmericanQuestion : Question
     {
         public string CorrectAnswer { get; set; }
-        public string[] IncorrectAnswers { get; set; }
+
+        public string IncorrectAnswers { get; set; }
+
+        [NotMapped]
+        public List<string> IncorrectAnswersArray
+        {
+            get
+            {
+                return (this.IncorrectAnswers != null) ? 
+                       new List<string>(this.IncorrectAnswers.Split(';')) :
+                       new List<string>();
+            }
+            set
+            {
+                this.IncorrectAnswers = string.Join(";", value);
+            }
+        }
 
         [NotMapped]
         public const int MinAnswers = 4;
@@ -94,14 +110,44 @@ namespace EyalProject.Models
     [Table("MoreThanOneQuestions")]
     public class MoreThanOneQuestion : Question
     {
-        public string[] CorrectAnswers { get; set; }
-        public string[] IncorrectAnswers { get; set; }
+        public string CorrectAnswers { get; set; }
+        public string IncorrectAnswers { get; set; }
+
+        [NotMapped]
+        public List<string> CorrectAnswersArray
+        {
+            get
+            {
+                return (this.CorrectAnswers != null) ?
+                       new List<string>(this.CorrectAnswers.Split(';')) :
+                       new List<string>();
+            }
+            set
+            {
+                this.CorrectAnswers = string.Join(";", value);
+            }
+        }
+
+        [NotMapped]
+        public List<string> IncorrectAnswersArray
+        {
+            get
+            {
+                return (this.IncorrectAnswers != null) ?
+                       new List<string>(this.IncorrectAnswers.Split(';')) :
+                       new List<string>();
+            }
+            set
+            {
+                this.IncorrectAnswers = string.Join(";", value);
+            }
+        }
 
         [NotMapped]
         public const int MinAnswers = 4;
 
         [NotMapped]
-        public const int MaxAnswers = 5;
+        public const int MaxAnswers = 8;
     }
 
     [Table("OpenQuestions")]
