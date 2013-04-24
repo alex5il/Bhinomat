@@ -24,32 +24,7 @@ namespace EyalProject.Models
         public DbSet<Subject> SubjectsSet { get; set; }
         public DbSet<Subsubject> SubsubjectsSet { get; set; }
         public DbSet<Difficulty> DifficultiesSet { get; set; }
-        public DbSet<QuestionType> QuestionTypesSet { get; set; }
     }
-
-    // Helper class for getting the data for all types of questions
-
-    public class Questions
-    {
-        public int QuestionId { get; set; }
-        public DateTime LastUseDate { get; set; }
-        public string Course { get; set; }
-        public string Subject { get; set; }
-        public string Type { get; set; }
-        public string SecondarySubject { get; set; }
-        public string Difficulty { get; set; }
-        public string Question { get; set; }
-        public string Answear1 { get; set; }
-        public string Answear2 { get; set; }
-        public string Answear3 { get; set; }
-        public string Answear4 { get; set; }
-        public string Answear5 { get; set; }
-        public string Answear6 { get; set; }
-        public string Answear7 { get; set; }
-        public string Answear8 { get; set; }
-        public string AnswearCorrect { get; set; }
-    }
-
 
     #region Questions
 
@@ -69,10 +44,6 @@ namespace EyalProject.Models
         public int DifficultyId { get; set; }
         [ForeignKey("DifficultyId")]
         public Difficulty Difficulty { get; set; }
-
-        public int TypeId { get; set; }
-        [ForeignKey("TypeId")]
-        public QuestionType QuestionType { get; set; }
 
         [NotMapped]
         public Course Course
@@ -113,7 +84,10 @@ namespace EyalProject.Models
         public string CorrectAnswer { get; set; }
         public string[] IncorrectAnswers { get; set; }
 
+        [NotMapped]
         public const int MinAnswers = 4;
+
+        [NotMapped]
         public const int MaxAnswers = 5;
     }
 
@@ -123,7 +97,10 @@ namespace EyalProject.Models
         public string[] CorrectAnswers { get; set; }
         public string[] IncorrectAnswers { get; set; }
 
+        [NotMapped]
         public const int MinAnswers = 4;
+
+        [NotMapped]
         public const int MaxAnswers = 5;
     }
 
@@ -179,13 +156,11 @@ namespace EyalProject.Models
         public string Name { get; set; }
 	}
 
-    [Table("QuestionTypes")]
-    public class QuestionType
+    public enum QuestionType
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-
-        public string Name { get; set; }
+        American,
+        MoreThanOne,
+        Open,
+        TrueFalse
     }
 }
