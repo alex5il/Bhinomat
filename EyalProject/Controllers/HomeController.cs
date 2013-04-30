@@ -14,7 +14,14 @@ namespace EyalProject.Controllers
 
         public ActionResult BuildDb()
         {
-            ViewBag.Message = "Build DB page here";
+            ViewBag.NumberOfAmerican = qcDB.AmericanQuestionsSet.Count();
+            ViewBag.NumberOfOpen = qcDB.OpenQuestionsSet.Count();
+            ViewBag.NumberOfMoreThanOne = qcDB.MoreThenOneQuestionsSet.Count();
+            ViewBag.NumberOfTrueFalse = qcDB.TrueFalseQuestionsSet.Count();
+            ViewBag.Total = ViewBag.NumberOfAmerican +
+                            ViewBag.NumberOfOpen +
+                            ViewBag.NumberOfMoreThanOne +
+                            ViewBag.NumberOfTrueFalse;
 
             return View();
         }
@@ -44,8 +51,8 @@ namespace EyalProject.Controllers
         {
             switch (strType)
             {
-                case "Open": OpenQuestion oQuest1 = qcDB.OpenQuestionSet.FirstOrDefault(q => q.Id == nId);
-                    if (oQuest1 != null) qcDB.OpenQuestionSet.Remove(oQuest1);
+                case "Open": OpenQuestion oQuest1 = qcDB.OpenQuestionsSet.FirstOrDefault(q => q.Id == nId);
+                    if (oQuest1 != null) qcDB.OpenQuestionsSet.Remove(oQuest1);
                     break;
                 case "TrueFalse": TrueFalseQuestion oQuest2 = qcDB.TrueFalseQuestionsSet.FirstOrDefault(q => q.Id == nId);
                     if (oQuest2 != null) qcDB.TrueFalseQuestionsSet.Remove(oQuest2);
@@ -63,7 +70,7 @@ namespace EyalProject.Controllers
             List<Question> questionModel = new List<Question>();
 
             questionModel.AddRange(qcDB.TrueFalseQuestionsSet);
-            questionModel.AddRange(qcDB.OpenQuestionSet);
+            questionModel.AddRange(qcDB.OpenQuestionsSet);
             questionModel.AddRange(qcDB.AmericanQuestionsSet);
             questionModel.AddRange(qcDB.MoreThenOneQuestionsSet);
 
@@ -79,7 +86,7 @@ namespace EyalProject.Controllers
 
             switch (strType)
             {
-                case "Open": OpenQuestion oQuest1 = qcDB.OpenQuestionSet.FirstOrDefault(q => q.Id == nId);
+                case "Open": OpenQuestion oQuest1 = qcDB.OpenQuestionsSet.FirstOrDefault(q => q.Id == nId);
                     break;
                 case "TrueFalse": TrueFalseQuestion oQuest2 = qcDB.TrueFalseQuestionsSet.FirstOrDefault(q => q.Id == nId);
                     break;
@@ -88,7 +95,7 @@ namespace EyalProject.Controllers
                 case "MoreThanOne": MoreThanOneQuestion oQuest4 = qcDB.MoreThenOneQuestionsSet.FirstOrDefault(q => q.Id == nId);
                     break;
             }
-            
+
             return View("AddQuestion");
         }
 
@@ -97,7 +104,7 @@ namespace EyalProject.Controllers
             List<Question> questionModel = new List<Question>();
 
             questionModel.AddRange(qcDB.TrueFalseQuestionsSet);
-            questionModel.AddRange(qcDB.OpenQuestionSet);
+            questionModel.AddRange(qcDB.OpenQuestionsSet);
             questionModel.AddRange(qcDB.AmericanQuestionsSet);
             questionModel.AddRange(qcDB.MoreThenOneQuestionsSet);
 
