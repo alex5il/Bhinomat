@@ -3,56 +3,67 @@
 @{
     ViewBag.Title = "QuestionList";
 }
-
+<link href="~/Content/DataTables-1.9.4/media/css/jquery.dataTables.css" rel="stylesheet" />
+<script src="~/Scripts/DataTables-1.9.4/media/js/jquery.dataTables.min.js"></script>
+<script src="~/Scripts/MyScripts/jsQuestionList.js"></script>
 <h2>QuestionList</h2>
 
 @*<p>
     @Html.ActionLink("Create New", "Create")
 </p>*@
 
-<table width="100%" style="text-align: center">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.QuestionText)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LastUseDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.QuestionType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SubsubjectId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DifficultyId)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td style="width: 250px; height: 50px">
-            @Html.DisplayFor(modelItem => item.QuestionText)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastUseDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.QuestionType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SubsubjectId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DifficultyId)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "EditQuestion", new { nId=item.Id, strType=item.QuestionType }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "DeleteQuestion", new { nId=item.Id, strType=item.QuestionType })
-        </td>
-    </tr>
+
+@if (Model.Count() != 0)
+{
+
+    <table width="100%" style="text-align: center" id="tbDataTable" class="dataTable">
+        <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.QuestionText)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastUseDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QuestionType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SubsubjectId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DifficultyId)
+            </th>
+            <th></th>
+        </tr>
+        </thead>
+
+        <tbody>
+        @foreach (var item in Model) {
+            <tr>
+                <td style="width: 250px; height: 50px">
+                    @Html.DisplayFor(modelItem => item.QuestionText)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastUseDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QuestionType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SubsubjectId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DifficultyId)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditQuestion", new { nId=item.Id, strType=item.QuestionType }) |
+                    @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                    @Html.ActionLink("Delete", "DeleteQuestion", new { nId=item.Id, strType=item.QuestionType })
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
 }
-
-</table>
