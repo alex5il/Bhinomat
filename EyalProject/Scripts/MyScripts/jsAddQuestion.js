@@ -125,27 +125,27 @@ function addQuestion() {
     });
 }
 
-function changeCourse(courseId) {
-    $.ajax({
-        url: 'LoadCourseSubjects',
-        type: 'POST',
-        data: JSON.stringify({ courseId: courseId }),
-        dataType: 'json',
-        contentType: 'application/json',
-        success: function (data) {
-            $('select#ddlSubjects').empty();
+//function changeCourse(courseId) {
+//    $.ajax({
+//        url: 'LoadCourseSubjects',
+//        type: 'POST',
+//        data: JSON.stringify({ courseId: courseId }),
+//        dataType: 'json',
+//        contentType: 'application/json',
+//        success: function (data) {
+//            $('select#ddlSubjects').empty();
 
-            $.each(data, function () {
-                $('select#ddlSubjects').append(
-                '<option value="' + this.Id + '">'
-                + this.Name +
-                '</option>');
-            });
+//            $.each(data, function () {
+//                $('select#ddlSubjects').append(
+//                '<option value="' + this.Id + '">'
+//                + this.Name +
+//                '</option>');
+//            });
 
-            changeSubject($("#ddlSubjects").val());
-        }
-    });
-}
+//            changeSubject($("#ddlSubjects").val());
+//        }
+//    });
+//}
 
 function changeSubject(subjectId) {
    $.ajax({
@@ -168,7 +168,7 @@ function changeSubject(subjectId) {
 }
 
 $(function () {
-    changeCourse($("#ddlCourses").val());
+    //changeCourse($("#ddlCourses").val());
     changeSubject($("#ddlSubjects").val());
     changeQuestionType($("#ddlTypes").val());
 

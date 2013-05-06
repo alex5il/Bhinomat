@@ -384,7 +384,8 @@
     <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Scripts\jquery-ui-1.10.0.js" />
     <Content Include="Scripts\jquery-ui-1.10.0.min.js" />
-    <Content Include="Scripts\MyScripts\JavaScript1.js" />
+    <Content Include="Scripts\MyScripts\jsIndex.js" />
+    <Content Include="Scripts\MyScripts\jsQuestionList.js" />
     <Content Include="Scripts\MyScripts\jsAddQuestion.js" />
     <Content Include="Scripts\jquery.ui.datepicker-he.js" />
     <Content Include="Scripts\jquery-1.9.1.min.map" />
@@ -433,6 +434,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Home\AddQuestion.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

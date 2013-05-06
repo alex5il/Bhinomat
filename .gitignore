@@ -11,3 +11,9 @@ EyalProject/App_Data/MainData.mdf
 EyalProject/App_Data/MainData_log.ldf
 EyalProject/App_Data/MainData.mdf
 EyalProject/App_Data/MainData_log.ldf
+EyalProject/App_Data/aspnet-EyalProject.mdf
+EyalProject/App_Data/aspnet-EyalProject_log.ldf
+EyalProject/App_Data/MainData.mdf
+EyalProject/App_Data/MainData_log.ldf
+EyalProject/Views/Home/QuestionList.cshtml
+EyalProject/Web.config

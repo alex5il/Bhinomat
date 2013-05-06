@@ -21,7 +21,7 @@ namespace EyalProject.Controllers
             // Check if the user is currently logged in , if he is redirect to home page
             if (WebSecurity.IsAuthenticated)
             {
-                return RedirectToAction("BuildDb", "Home");
+                return RedirectToAction("Index", "Home");
             }
 
             ViewBag.ReturnUrl = returnUrl;
@@ -55,7 +55,7 @@ namespace EyalProject.Controllers
         {
             WebSecurity.Logout();
 
-            return RedirectToAction("BuildDb", "Home");
+            return RedirectToAction("Index", "Home");
         }
 
         //
@@ -67,7 +67,7 @@ namespace EyalProject.Controllers
             // Check if the user is currently logged in , if he is redirect to home page
             if (WebSecurity.IsAuthenticated)
             {
-                return RedirectToAction("BuildDb", "Home");
+                return RedirectToAction("Index", "Home");
             }
 
             return View();
@@ -88,7 +88,7 @@ namespace EyalProject.Controllers
                 {
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
                     WebSecurity.Login(model.UserName, model.Password);
-                    return RedirectToAction("BuildDb", "Home");
+                    return RedirectToAction("Index", "Home");
                 }
                 catch (MembershipCreateUserException e)
                 {
@@ -186,7 +186,7 @@ namespace EyalProject.Controllers
             }
             else
             {
-                return RedirectToAction("BuildDb", "Home");
+                return RedirectToAction("Index", "Home");
             }
         }
 

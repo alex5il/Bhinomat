@@ -1,0 +1,5 @@
+﻿<script src="~/Scripts/MyScripts/jsIndex.js"></script>
+
+<label class="form-label">קורס:</label>
+
+@Html.DropDownList("ddlCourses", (SelectList)ViewBag.Courses, new { @onchange = "changeCourse(this.value)" })

@@ -79,5 +79,9 @@ namespace EyalProject.Models
         [Display(Name = "וודא סיסמא")]
         [Compare("Password", ErrorMessage = "שני הסיסמאות אינם זהות")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name = "תפקיד")]
+        public string JobType { get; set; }
     }
 }

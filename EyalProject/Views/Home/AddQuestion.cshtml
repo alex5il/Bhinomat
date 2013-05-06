@@ -16,10 +16,10 @@
 <p style="color: red; font-weight: bold">@ViewBag.OutMessage</p>
 
 <section style="width: 30%; float: right">
-    <label class="form-label">קורס:</label>
+    @*<label class="form-label">קורס:</label>
 
     @Html.DropDownList("ddlCourses", (SelectList)ViewBag.Courses, new { @onchange = "changeCourse(this.value)" })
-    <br />
+    <br />*@
 
     <label class="form-label">נושא:</label>
     @Html.DropDownList("ddlSubjects", (SelectList)ViewBag.Subjects, new { @onchange = "changeSubject(this.value)" })

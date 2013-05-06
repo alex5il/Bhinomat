@@ -12,6 +12,26 @@ namespace EyalProject.Controllers
     {
         QuestionsContext qcDB = new QuestionsContext();
 
+        public ActionResult Index()
+        {
+            // TODO : Use the integrated role in user to check which role is our user and the 
+            // admin will edit it not the user so remove the register field later
+
+            //User.IsInRole("Admin");
+
+            ViewBag.Courses = new SelectList(qcDB.CoursesSet.ToList(), "Id", "Name");
+
+            Session.Add("PickedCourse", qcDB.CoursesSet.First());
+
+            return View();
+        }
+
+        [HttpPost]
+        public void SetTheCourseSession(int courseId)
+        {
+            Session.Add("PickedCourse", courseId);
+        }
+
         public ActionResult BuildDb()
         {
             ViewBag.NumberOfAmerican = qcDB.AmericanQuestionsSet.Count();
@@ -33,8 +53,22 @@ namespace EyalProject.Controllers
 
         public ActionResult AddQuestion()
         {
-            ViewBag.Courses = new SelectList(qcDB.CoursesSet.ToList(), "Id", "Name");
-            ViewBag.Subjects = new SelectList(qcDB.SubjectsSet.ToList(), "Id", "Name");
+            // Set the subject by the course from the session since we only have one session i didnt check which type is it
+            if (Session.Count > 0)
+            {
+                int? nTempId = (int?)Session[0];
+                ViewBag.Subjects =
+                    new SelectList(qcDB.SubjectsSet.Where(s => s.CourseId == nTempId).ToList(), "Id",
+                                   "Name");
+            }
+            else
+            {
+                ViewBag.Subjects =
+                    new SelectList(
+                        qcDB.SubjectsSet.Where(s => s.CourseId == qcDB.CoursesSet.FirstOrDefault().Id).ToList(), "Id",
+                        "Name");
+            }
+
             ViewBag.Subsubjects = new SelectList(qcDB.SubsubjectsSet.ToList(), "Id", "Name");
             ViewBag.Difficulties = new SelectList(qcDB.DifficultiesSet.ToList(), "Id", "Name");
             ViewBag.Types = new SelectList(new[] {
@@ -79,6 +113,11 @@ namespace EyalProject.Controllers
 
         public ActionResult EditQuestion(int nId, string strType)
         {
+            if (Session.Count > 0)
+                qcDB.SubjectsSet.Where(s => s.CourseId == (Session[0] as Course).Id).ToList();
+            else
+                qcDB.SubjectsSet.Where(s => s.CourseId == qcDB.CoursesSet.First().Id).ToList();
+
             ViewBag.Courses = new SelectList(qcDB.CoursesSet.ToList(), "Id", "Name");
             ViewBag.Subjects = new SelectList(qcDB.SubjectsSet.ToList(), "Id", "Name");
             ViewBag.Subsubjects = new SelectList(qcDB.SubsubjectsSet.ToList(), "Id", "Name");
